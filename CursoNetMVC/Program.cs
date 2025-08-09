@@ -1,4 +1,6 @@
-﻿namespace CursoNetMVC
+﻿using CursoNetMVC.Tools;
+
+namespace CursoNetMVC
 {
     public class Program
     {
@@ -8,6 +10,7 @@
            
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IMatematicas, Matematicas>();
 
             var app = builder.Build();
 
