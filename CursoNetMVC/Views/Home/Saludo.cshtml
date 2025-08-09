@@ -1,0 +1,65 @@
+﻿@model CursoNetMVC.Models.SaludoModel
+@{
+    ViewData["Title"] = "Saludo";
+    var nombre = Model.Nombre ?? "Invitado";
+    var mensaje = Model.Mensaje ?? "¡Que tengas un excelente día!";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .saludo-container {
+        max-width: 500px;
+        margin: 60px auto;
+        background: rgba(255,255,255,0.95);
+        border-radius: 18px;
+        box-shadow: 0 8px 32px 0 rgba(31,38,135,0.2);
+        padding: 40px 30px;
+        text-align: center;
+    }
+    .saludo-titulo {
+        font-size: 2.5rem;
+        color: #2193b0;
+        margin-bottom: 18px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+    .saludo-mensaje {
+        font-size: 1.3rem;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    .saludo-icono {
+        font-size: 3rem;
+        color: #6dd5ed;
+        margin-bottom: 18px;
+        display: block;
+    }
+</style>
+
+<div class="saludo-container">
+    <span class="saludo-icono">👋</span>
+    <div class="saludo-titulo">¡Hola, @nombre!</div>
+    <div class="saludo-mensaje">@mensaje</div>
+</div>
+
+<form asp-action="SaludoRegreso">
+
+    <div class="form-group">
+        <label asp-for="Nombre" class="control-label">Tu Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Mensaje" class="control-label">Tu Mensaje</label>
+        <input asp-for="Mensaje" class="form-control" />
+        <span asp-validation-for="Mensaje" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-3">
+        <input type="submit" value="SaludoRegreso" class="btn btn-primary" />
+    </div>
+</form>

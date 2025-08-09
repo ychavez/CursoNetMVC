@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Producto>
+
+<h1>Index</h1>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(Model => Model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.Precio)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>

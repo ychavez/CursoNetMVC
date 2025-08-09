@@ -23,6 +23,25 @@ namespace CursoNetMVC.Controllers
             return View();
         }
 
+
+        [HttpGet("Saludo")]
+        public IActionResult Saludo()
+        {
+            SaludoModel saludo = new() { Nombre = "Juan Perez", Mensaje = "Saludos" };
+            return View(saludo);
+        }
+
+        [HttpPost("SaludoRegreso")]
+        public IActionResult SaludoRegreso(SaludoModel saludo)
+        {
+            if (ModelState.IsValid)
+            {
+                return View("Saludo", saludo);
+            }
+            return View("Saludo", saludo);
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
