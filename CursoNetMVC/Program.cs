@@ -1,5 +1,6 @@
 ﻿using CursoNetMVC.Data;
 using CursoNetMVC.Tools;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CursoNetMVC
@@ -17,6 +18,15 @@ namespace CursoNetMVC
                 (x => x.UseSqlServer(builder.Configuration
                 .GetConnectionString("CursoContextConnection")));
 
+            //configurar la seguridad
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(x =>
+            {
+                x.Password.RequiredLength = 6;
+
+            }).AddEntityFrameworkStores<CursoDbContext>()
+            .AddDefaultTokenProviders();
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -26,12 +36,13 @@ namespace CursoNetMVC
             }
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Products}/{action=Index}/{id?}")
+                pattern: "{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();

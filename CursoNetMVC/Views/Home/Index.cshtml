@@ -1,8 +1,25 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var nombre = "Yael";
+    var edad = 33;
+
+
+    var frutas = new List<string> { "Manzanas", "Peras", "Melon" };
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+
+    <p>Nombre: @nombre</p>
+    <p>Edad: @edad</p>
+
+    <ul>
+        @foreach (var item in frutas)
+        {
+            <li>@item</li>
+        }
+    </ul>
+
+
+    <h1 class="display-4">@ViewData["Saludo1"]</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

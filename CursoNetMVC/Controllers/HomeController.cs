@@ -8,6 +8,7 @@ namespace CursoNetMVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+    
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -15,6 +16,11 @@ namespace CursoNetMVC.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Saludo = "Hola mundo desde el controller";
+
+            ViewData["Saludo"] = "hola mundo desde el controller del ViewData!";
+
+
             return View();
         }
 
