@@ -52,3 +52,5 @@ namespace CursoNetMVC.Migrations
         }
     }
 }
+/* Practica agregar EFCore al proyecto de practica*/
+/*break*/

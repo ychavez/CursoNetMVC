@@ -1,51 +1,104 @@
-﻿using CursoNetMVC.Models;
+﻿using CursoNetMVC.Data;
+using CursoNetMVC.Models;
 using CursoNetMVC.Tools;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CursoNetMVC.Controllers
 {
     public class ProductsController : Controller
     {
-        static List<Producto> productos;
-        private readonly IMatematicas matematicas;
+        private readonly CursoDbContext dbContext;
 
-        public ProductsController(IMatematicas matematicas)
+        public ProductsController(CursoDbContext dbContext)
         {
-         
-            productos = new()
-            {
-                new Producto { Id = 1, Nombre = "Laptop", Descripcion = "Portátil de 15 pulgadas", Precio = 1200.99m },
-                new Producto { Id = 2, Nombre = "Smartphone", Descripcion = "Teléfono inteligente Android", Precio = 699.50m },
-                new Producto { Id = 3, Nombre = "Auriculares", Descripcion = "Auriculares inalámbricos", Precio = 150.00m }
-            };
-            this.matematicas = matematicas;
+            this.dbContext = dbContext;
         }
         // Get todos los productos para una tabla
         public async Task<IActionResult> Index()
         {
-          
-            return View(productos);
+
+            return View(dbContext.Productos.Where(x => x.Activo).ToList());
         }
+
+
+        public async Task<IActionResult> Edit(int? Id)
+        {
+            if (Id is null)
+                return NotFound();
+
+            var product = await dbContext.Productos.FindAsync(Id);
+
+            if (product is null)
+                return NotFound();
+
+            return View(product);
+        }
+
+
+        [HttpPost] 
+        public async Task<IActionResult> Edit(int Id, Producto producto) 
+        {
+            if (Id != producto.Id)
+                return NotFound();
+
+            dbContext.Update(producto);
+            await dbContext.SaveChangesAsync();
+
+            return View(producto);
+        
+        }
+
 
         public async Task<IActionResult> Create()
         {
-           
             return View(new Producto());
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(Producto producto)
         {
-           
-            var total = matematicas.suma(producto.Precio, 10);
 
-            producto.Precio = total;
 
-            productos.Add(producto);
+            dbContext.Productos.Add(producto);
+
+            await dbContext.SaveChangesAsync();
+
             return View();
         }
 
 
 
+
+        public async Task<IActionResult> Delete(int? id) 
+        {
+
+            if (id is null)
+                return NotFound();
+
+            var product = await dbContext.Productos.FirstOrDefaultAsync(x => x.Id == id);
+
+
+
+            if (product is null)
+                return NotFound();
+
+            return View(product);      
+        }
+
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirm(int id) 
+        {
+            var product = await dbContext.Productos.FindAsync(id);
+            if (product is not null)
+            {
+                dbContext.Productos.Remove(product);
+                await dbContext.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        
+        }
     }
 }

@@ -13,5 +13,7 @@ namespace CursoNetMVC.Models
         [MaxLength(200)]
         public string Descripcion { get; set; } = null!;
         public decimal Precio { get; set; }
+
+        public bool Activo { get; set; }
     }
 }
