@@ -1,4 +1,6 @@
-﻿using CursoNetMVC.Tools;
+﻿using CursoNetMVC.Data;
+using CursoNetMVC.Tools;
+using Microsoft.EntityFrameworkCore;
 
 namespace CursoNetMVC
 {
@@ -11,6 +13,9 @@ namespace CursoNetMVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddScoped<IMatematicas, Matematicas>();
+            builder.Services.AddDbContext<CursoDbContext>
+                (x => x.UseSqlServer(builder.Configuration
+                .GetConnectionString("CursoContextConnection")));
 
             var app = builder.Build();
 
@@ -26,7 +31,7 @@ namespace CursoNetMVC
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=Products}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
