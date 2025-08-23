@@ -13,5 +13,9 @@ namespace CursoNetMVC.Data
         }
 
         public DbSet<Producto> Productos { get; set; }
+
+        public DbSet<Categoria> Categorias { get; set; }
+
+        public DbSet<SubCategoria> SubCategorias { get; set; }
     }
 }

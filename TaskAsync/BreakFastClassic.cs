@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TaskAsync
+﻿namespace TaskAsync
 {
     public class BreakFastClassic
     {
@@ -21,7 +14,6 @@ namespace TaskAsync
             Juice();
             Console.WriteLine($"El desayuno de {client} esta listo");
         }
-
 
 
         public static async Task DoBreakFastAsync(string client)

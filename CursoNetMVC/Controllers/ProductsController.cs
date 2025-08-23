@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CursoNetMVC.Controllers
 {
-    [Authorize]
+   
     public class ProductsController : Controller
     {
         private readonly CursoDbContext dbContext;
@@ -21,6 +21,12 @@ namespace CursoNetMVC.Controllers
     
         public async Task<IActionResult> Index()
         {
+
+            //var productos = dbContext.Productos
+            //    .Include(x=> x.Categoria)
+            //    .ThenInclude(x=> x.SubCategoria)
+            //    .ToList();
+
 
             return View(dbContext.Productos.Where(x => x.Activo).ToList());
         }
