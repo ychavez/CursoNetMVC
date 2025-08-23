@@ -1,0 +1,23 @@
+﻿@using CursoNetMVC.ViewModels
+@model LoginViewModel
+
+<h2>Iniciar sesion</h2>
+
+<form asp-action="Login" method="post">
+    <input type="hidden" name="returnUrl"/>
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <button type="submit">Entrar</button>
+
+</form>

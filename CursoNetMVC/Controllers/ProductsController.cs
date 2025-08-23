@@ -1,11 +1,13 @@
 ﻿using CursoNetMVC.Data;
 using CursoNetMVC.Models;
 using CursoNetMVC.Tools;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CursoNetMVC.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly CursoDbContext dbContext;
@@ -15,6 +17,8 @@ namespace CursoNetMVC.Controllers
             this.dbContext = dbContext;
         }
         // Get todos los productos para una tabla
+
+    
         public async Task<IActionResult> Index()
         {
 
@@ -66,10 +70,7 @@ namespace CursoNetMVC.Controllers
 
             return View();
         }
-
-
-
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id) 
         {
 
@@ -87,6 +88,7 @@ namespace CursoNetMVC.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirm(int id) 
         {

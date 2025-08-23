@@ -22,6 +22,7 @@ namespace CursoNetMVC
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(x =>
             {
                 x.Password.RequiredLength = 6;
+                
 
             }).AddEntityFrameworkStores<CursoDbContext>()
             .AddDefaultTokenProviders();
