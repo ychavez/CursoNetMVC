@@ -27,6 +27,7 @@ namespace CursoNetMVC
             }).AddEntityFrameworkStores<CursoDbContext>()
             .AddDefaultTokenProviders();
 
+            builder.Services.AddMemoryCache();
 
             var app = builder.Build();
 

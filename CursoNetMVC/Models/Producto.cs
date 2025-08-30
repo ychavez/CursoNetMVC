@@ -16,6 +16,6 @@ namespace CursoNetMVC.Models
 
         public bool Activo { get; set; }
 
-        public Categoria Categoria { get; set; }
+
     }
 }
